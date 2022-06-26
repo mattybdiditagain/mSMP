@@ -20,3 +20,7 @@ Commands:
 - /warpinfo [name]
 - /warp [name]
 - /warps
+- /pog
+- /f
+- /L [player]
+

@@ -23,4 +23,9 @@ Commands:
 - /pog
 - /f
 - /L [player]
+- /show
+- /seen [user]
+- /tpa [player]
+- /tpayes [player]
+- /freeze [player] - staff.freeze
 

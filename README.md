@@ -7,3 +7,7 @@ Commands:
 - /ccb [player] - bans player then clears chat
 - /tp [player]
 - /tpc [X] [Y] [Z]
+- /afk
+- /tell [player] [message]
+- /reply [message]
+- /report [player] [reason]

@@ -240,7 +240,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public static void logToChatChannel(String message) {
-        DiscordWebhook webhook = new DiscordWebhook("https://canary.discord.com/api/webhooks/964696698511327363/3tH5nvoSxnQe2roXDaw7ZQTZl2_VgswXuECzF0BTQ0i5G1WGwdDL_oqMcr4BhExLpSmt");
+        DiscordWebhook webhook = new DiscordWebhook("url");
         webhook.setContent(message);
         try {
             webhook.execute();
@@ -249,7 +249,7 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
     public static void logToGameLogs(String message) {
-        DiscordWebhook webhook = new DiscordWebhook("https://canary.discord.com/api/webhooks/984506310999539752/w2FAVIg2E4uz4R5_gA1sdfcAnAZZH1MVjoN7xRE2zpxk2_DZbnXTZKhVRHOX0O4A5t-d");
+        DiscordWebhook webhook = new DiscordWebhook("url");
         webhook.setContent(message);
         try {
             webhook.execute();

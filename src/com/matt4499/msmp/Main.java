@@ -33,6 +33,11 @@ public class Main extends JavaPlugin implements Listener {
     public static JavaPlugin instance;
     public static HomeHelper homeHelper;
     public static WarpHelper warpHelper;
+
+    public static FileConfiguration config;
+    public static File configFile;
+    public String chatWebhookURL;
+    public String logWebhookURL;
     @Override
     public void onEnable() {
 
@@ -43,6 +48,9 @@ public class Main extends JavaPlugin implements Listener {
 
         playersConfigFile = new File(getDataFolder(), "players.yml");
         playerdata = YamlConfiguration.loadConfiguration(playersConfigFile);
+
+        configFile = new File(getDataFolder(), "config.yml");
+        config = YamlConfiguration.loadConfiguration(configFile);
 
         startScoreboardTimer();
         FreezeCommand freezeCommand = new FreezeCommand();
@@ -240,7 +248,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public static void logToChatChannel(String message) {
-        DiscordWebhook webhook = new DiscordWebhook("url");
+        DiscordWebhook webhook = new DiscordWebhook(config.getString("chat-channel-webhook-url"));
         webhook.setContent(message);
         try {
             webhook.execute();
@@ -249,7 +257,7 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
     public static void logToGameLogs(String message) {
-        DiscordWebhook webhook = new DiscordWebhook("url");
+        DiscordWebhook webhook = new DiscordWebhook(config.getString("logs-channel-webhook-url"));
         webhook.setContent(message);
         try {
             webhook.execute();

@@ -11,3 +11,12 @@ Commands:
 - /tell [player] [message]
 - /reply [message]
 - /report [player] [reason]
+- /trash
+- /sethome [name]
+- /delhome [name]
+- /home [name]
+- /setwarp [name] [description]
+- /delwarp [name] - staff.delwarp
+- /warpinfo [name]
+- /warp [name]
+- /warps

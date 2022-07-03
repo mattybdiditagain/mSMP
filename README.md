@@ -28,4 +28,8 @@ Commands:
 - /tpa [player]
 - /tpayes [player]
 - /freeze [player] - staff.freeze
+- /farmingworld - teleports you to farming world
+- /farmingworld nether - teleports you to nether farming world
+- /farmingworld create - staff.fwc - creates farming world if it doesnt exist
+- /farmingworld createnether - staff.fwc - creates nether farming world if it doesnt exist
 

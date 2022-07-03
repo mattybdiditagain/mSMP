@@ -1,6 +1,9 @@
 package com.matt4499.msmp.events;
 import com.matt4499.msmp.Main;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,7 +28,7 @@ public class CrateItemHandler implements Listener {
             ItemStack inHand = p.getInventory().getItemInMainHand();
             ItemMeta itemMeta = inHand.getItemMeta();
             if(itemMeta == null) { return; }
-            if (itemMeta.getDisplayName().equals("§cKnockus Backus")) {
+            if (itemMeta.getDisplayName().contains("Knockus Backus") && inHand.getType() == Material.STICK) {
                 List<String> lore = itemMeta.getLore();
                 if(lore == null) {
                     p.getInventory().setItemInMainHand(null);
@@ -36,9 +39,10 @@ public class CrateItemHandler implements Listener {
                         int usesInt = Integer.parseInt(line.replace("§4Uses: ", ""));
                         if (usesInt > 1) {
                             usesInt -= 1;
-                            itemMeta.setLore(List.of("§4Uses: " + usesInt));
+                            itemMeta.setLore(List.of(Main.hex("&4Uses: " + usesInt)));
                             inHand.setItemMeta(itemMeta);
-                            p.sendMessage(Main.hex("§7You used #dc143cKnockus Backus &7and have #dc143c" + usesInt + " &7uses left!"));
+                            p.sendMessage(Main.hex("&7You used #dc143cKnockus Backus &7and have #dc143c" + usesInt + " &7uses left!"));
+                            p.playSound(p.getLocation(), Sound.ITEM_CROSSBOW_HIT,1.0F, 1.0F);
                         } else {
                             p.getInventory().setItemInMainHand(null);
                             p.sendMessage(Main.hex("#dc143cYou have no uses left!"));

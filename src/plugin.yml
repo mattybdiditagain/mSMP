@@ -128,3 +128,7 @@ commands:
   seen:
     description: View when a player was last seen
     usage: /seen <player>
+  farmworld:
+    description: Teleport to the farmworld
+    usage: /farmworld
+    aliases: [fw, farmingworld]

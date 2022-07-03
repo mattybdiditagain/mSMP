@@ -20,7 +20,7 @@ public class CrateHandler implements Listener {
     public CrateHandler() {
         HashMap<Enchantment, Integer> knockusBackusEnchants = new HashMap<>();
         knockusBackusEnchants.put(Enchantment.KNOCKBACK, 5);
-        prizes.add(generateItem(Material.STICK, 1, true, knockusBackusEnchants, "#dc143cKnockus Backus"));
+        prizes.add(generateItem(Material.STICK, 1, true, knockusBackusEnchants, "&4Knockus Backus"));
         prizes.add(new ItemStack(Material.IRON_INGOT, 8));
         prizes.add(new ItemStack(Material.GOLD_INGOT, 8));
         prizes.add(new ItemStack(Material.DIAMOND, 2));
@@ -38,7 +38,7 @@ public class CrateHandler implements Listener {
         prizes.add(new ItemStack(Material.STONE_BRICKS, 64));
         prizes.add(new ItemStack(Material.OAK_LOG, 64));
         prizes.add(new ItemStack(Material.STONE, 64));
-        prizes.add(generateItem(Material.CHEST, 1, false, null, "#dc143cVote Crate"));
+        prizes.add(generateItem(Material.CHEST, 1, false, null, "&aVote Crate"));
     }
 
     public ItemStack getRandomItem() {
@@ -50,7 +50,7 @@ public class CrateHandler implements Listener {
         ItemStack item = new ItemStack(m);
         ItemMeta im = item.getItemMeta();
         item.setAmount(count);
-        if(customname.equals("#dc143cKnockus Backus")) {
+        if(customname.contains("&4Knockus Backus")) {
             ArrayList<String> lore = new ArrayList<>();
             lore.add(Main.hex("§4Uses: 10"));
             assert im != null;
@@ -73,7 +73,7 @@ public class CrateHandler implements Listener {
         ItemStack won = getRandomItem();
         player.getInventory().addItem(won);
         ItemMeta im = won.getItemMeta();
-        String name = "";
+        String name;
         if(im == null || !im.hasDisplayName()) {
             name = won.getType().getKey().getKey();
         } else {
@@ -102,9 +102,11 @@ public class CrateHandler implements Listener {
             if (e.getItem().getType() == Material.CHEST) {
                 ItemMeta im = e.getItem().getItemMeta();
                 if (im == null) return;
-                if (im.getDisplayName().equals(Main.hex("#dc143cVote Crate"))) {
+                if (im.getDisplayName().contains(Main.hex("&aVote Crate"))) {
                     e.setCancelled(true);
                     openCrate(e.getPlayer());
+                } else {
+                    Bukkit.getConsoleSender().sendMessage("name: " + im.getDisplayName());
                 }
             }
         }
@@ -120,7 +122,7 @@ public class CrateHandler implements Listener {
             player.sendMessage(Main.hex("#dc143cYou don't have enough space in your inventory!"));
             return;
         }
-        player.getInventory().addItem(generateItem(Material.CHEST, 1, false, null, "#dc143cVote Crate"));
+        player.getInventory().addItem(generateItem(Material.CHEST, 1, false, null, "&aVote Crate"));
     }
 
 }

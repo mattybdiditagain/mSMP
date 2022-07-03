@@ -5,8 +5,7 @@ import com.matt4499.msmp.homes.*;
 import com.matt4499.msmp.types.DataHelper;
 import com.matt4499.msmp.types.DiscordWebhook;
 import com.matt4499.msmp.warps.*;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -34,27 +33,33 @@ public class Main extends JavaPlugin implements Listener {
     public static HomeHelper homeHelper;
     public static WarpHelper warpHelper;
 
-    public static FileConfiguration config;
+    public FileConfiguration config = this.getConfig();
     public static File configFile;
-    public String chatWebhookURL;
-    public String logWebhookURL;
+    public static String chatWebhookURL;
+    public static String logWebhookURL;
     @Override
     public void onEnable() {
-
+        WorldCreator wc = new WorldCreator("farmworld");
+        wc.createWorld();
+        WorldCreator wc2 = new WorldCreator("farmworld_nether").environment(World.Environment.NETHER).type(WorldType.NORMAL);
+        wc2.createWorld();
         instance = this;
         homeHelper = new HomeHelper();
         warpHelper = new WarpHelper();
-
-
         playersConfigFile = new File(getDataFolder(), "players.yml");
         playerdata = YamlConfiguration.loadConfiguration(playersConfigFile);
+        config.addDefault("chat-channel-webhook-url", "ChangeMe");
+        config.addDefault("logs-channel-webhook-url", "ChangeMe");
+        config.options().copyDefaults(true);
+        saveConfig();
 
-        configFile = new File(getDataFolder(), "config.yml");
-        config = YamlConfiguration.loadConfiguration(configFile);
+        chatWebhookURL = this.config.getString("chat-channel-webhook-url");
+        logWebhookURL = this.config.getString("logs-channel-webhook-url");
 
         startScoreboardTimer();
         FreezeCommand freezeCommand = new FreezeCommand();
         WarpCommand warpCommand = new WarpCommand();
+        FarmWorldCommand fwc = new FarmWorldCommand();
         Bukkit.getPluginManager().registerEvents(new AFKCommand(), this);
         Bukkit.getPluginManager().registerEvents(new DataHelper(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
@@ -75,6 +80,7 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(freezeCommand, this);
         Bukkit.getPluginManager().registerEvents(new hoeaoe(), this);
         Bukkit.getPluginManager().registerEvents(warpCommand, this);
+        Bukkit.getPluginManager().registerEvents(fwc, this);
 
         getCommand("afk").setExecutor(new AFKCommand());
         getCommand("tell").setExecutor(new TellCommand());
@@ -114,6 +120,8 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("delhome").setExecutor(new DelHomeCommand());
         getCommand("homes").setExecutor(new HomesCommand());
+
+        getCommand("farmworld").setExecutor(fwc);
     }
     @Override
     public void onDisable() {
@@ -248,7 +256,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public static void logToChatChannel(String message) {
-        DiscordWebhook webhook = new DiscordWebhook(config.getString("chat-channel-webhook-url"));
+        DiscordWebhook webhook = new DiscordWebhook(chatWebhookURL);
         webhook.setContent(message);
         try {
             webhook.execute();
@@ -257,7 +265,7 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
     public static void logToGameLogs(String message) {
-        DiscordWebhook webhook = new DiscordWebhook(config.getString("logs-channel-webhook-url"));
+        DiscordWebhook webhook = new DiscordWebhook(logWebhookURL);
         webhook.setContent(message);
         try {
             webhook.execute();

@@ -85,7 +85,7 @@ public class CrateHandler implements Listener {
             player.getWorld().dropItem(player.getLocation(), won);
         }
 
-        Bukkit.broadcastMessage(Main.hex("#dc143c&lCRATES &f➠ &7" + player.getName() + " &7has won #dc143c" +  won.getAmount() + "x #dc143c" + name + " &7from a #dc143c/vote &7crate!"));
+        Bukkit.broadcastMessage(Main.hex("#dc143c&lCRATES &7➠ &7" + player.getName() + " &7has won #dc143c" +  won.getAmount() + "x #dc143c" + name + " &7from a #dc143c/vote &7crate!"));
         Main.logToChatChannel("**CRATES:** " + player.getName() + " has won ***" + won.getAmount() + "x " + uncolor(name) + "*** from a /vote crate!");
         Main.logToGameLogs("[Crates] " + player.getName() + " has won " + won.getAmount() + "x " + uncolor(name) + " from a /vote crate!");
     }

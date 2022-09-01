@@ -15,12 +15,12 @@ public class BackCommand implements CommandExecutor {
         Player player = (Player) sender;
         Location loc = back.get(player);
         if(loc == null) {
-            player.sendMessage(Main.hex("#dc143c&lBACK &f➠ #dc143cYou have no previous location."));
+            player.sendMessage(Main.hex("#dc143c&lBACK &7➠ #dc143cYou have no previous location."));
             return true;
         }
         back.put(player, player.getLocation());
         player.teleport(loc);
-        player.sendMessage(Main.hex("#dc143c&lBACK &f➠ &aTeleported to your previous location."));
+        player.sendMessage(Main.hex("#dc143c&lBACK &7➠ &aTeleported to your previous location."));
         return true;
     }
 }

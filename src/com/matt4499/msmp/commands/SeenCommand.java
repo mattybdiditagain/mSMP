@@ -17,7 +17,7 @@ public class SeenCommand implements CommandExecutor {
             if(Bukkit.getPlayerExact(username) == null) {
                 Object lastSeenData = Main.getData(Bukkit.getOfflinePlayer(username).getUniqueId(), "lastseen");
                 if(lastSeenData == null) {
-                    p.sendMessage(Main.hex("#dc143cSEEN &f➠ #dc143cPlayer has never joined this server."));
+                    p.sendMessage(Main.hex("#dc143cSEEN &7➠ #dc143cPlayer has never joined this server."));
                     return true;
                 }
                 long lastSeen = (long) lastSeenData;
@@ -27,9 +27,9 @@ public class SeenCommand implements CommandExecutor {
                 long hours = (diff - (days * 1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
                 long minutes = (diff - (days * 1000 * 60 * 60 * 24) - (hours * 1000 * 60 * 60)) / (1000 * 60);
                 long seconds = (diff - (days * 1000 * 60 * 60 * 24) - (hours * 1000 * 60 * 60) - (minutes * 1000 * 60)) / 1000;
-                p.sendMessage(Main.hex("#dc143cSEEN &f➠ #dc143c" + username + " &7was last seen " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds ago."));
+                p.sendMessage(Main.hex("#dc143cSEEN &7➠ #dc143c" + username + " &7was last seen " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds ago."));
             } else {
-                p.sendMessage(Main.hex(("#dc143cSEEN &f➠ " + username + " is currently online!")));
+                p.sendMessage(Main.hex(("#dc143cSEEN &7➠ " + username + " is currently online!")));
             }
             return true;
         }

@@ -13,13 +13,13 @@ public class HomesCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player p = (Player) commandSender;
         if(homeHelper.getPlayerHomeCount(p) == 0) {
-            p.sendMessage(Main.hex("#dc143c&lHOMES &f➠ #dc143cYou have no homes!"));
+            p.sendMessage(Main.hex("#dc143c&lHOMES &7➠ #dc143cYou have no homes!"));
             return true;
         }
         HashMap<String, Location> homes = homeHelper.getPlayerHomes(p);
         for(String homeName : homes.keySet()) {
             Location loc = homes.get(homeName);
-            p.sendMessage(Main.hex("#dc143c&lHOMES &f➠ &7Home: #dc143c" + homeName + " &7- #dc143c" + Math.round(loc.getBlockX()) + "&7, #dc143c" + Math.round(loc.getBlockY()) + "&7, #dc143c" + Math.round(loc.getBlockZ()) + " &7- #dc143c" + loc.getWorld().getName()));
+            p.sendMessage(Main.hex("#dc143c&lHOMES &7➠ &7Home: #dc143c" + homeName + " &7- #dc143c" + Math.round(loc.getBlockX()) + "&7, #dc143c" + Math.round(loc.getBlockY()) + "&7, #dc143c" + Math.round(loc.getBlockZ()) + " &7- #dc143c" + loc.getWorld().getName()));
         }
         return true;
     }

@@ -11,16 +11,16 @@ public class ReportCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player reporter = (Player) commandSender;
         if(args.length == 0) {
-            reporter.sendMessage(Main.hex("#dc143c&lSTAFF &f➠ #dc143cUsage: /report <player> <reason>"));
+            reporter.sendMessage(Main.hex("#dc143c&lSTAFF &7➠ #dc143cUsage: /report <player> <reason>"));
             return true;
         }
         String reported = args[0];
             if(reporter.getName().equalsIgnoreCase(reported)) {
-                reporter.sendMessage(Main.hex("#dc143c&lREPORTS &f➠ #dc143cYou cannot report yourself!"));
+                reporter.sendMessage(Main.hex("#dc143c&lREPORTS &7➠ #dc143cYou cannot report yourself!"));
                 return true;
             }
             if(args.length < 2) {
-                reporter.sendMessage(Main.hex("#dc143c&lREPORTS &f➠ #dc143cUsage: /report <player> <reason>"));
+                reporter.sendMessage(Main.hex("#dc143c&lREPORTS &7➠ #dc143cUsage: /report <player> <reason>"));
                 return true;
             }
             StringBuilder sb = new StringBuilder();
@@ -31,11 +31,11 @@ public class ReportCommand implements CommandExecutor {
             reason = sb.toString();
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(p.hasPermission("staff.reports")) {
-                    p.sendMessage(Main.hex("#dc143c&lREPORTS &f➠ &7"+ reporter.getDisplayName() + " &7reported " + reported + " &7for: " + reason));
+                    p.sendMessage(Main.hex("#dc143c&lREPORTS &7➠ &7"+ reporter.getDisplayName() + " &7reported " + reported + " &7for: " + reason));
                 }
             }
             Main.logToGameLogs("<@&805283750485295166> [Report] " + reporter.getDisplayName() + " reported " + reported + " for: " + reason);
-            reporter.sendMessage(Main.hex("#dc143c&lREPORTS &f➠ &aStaff have received your report!"));
+            reporter.sendMessage(Main.hex("#dc143c&lREPORTS &7➠ &aStaff have received your report!"));
         return true;
     }
 }

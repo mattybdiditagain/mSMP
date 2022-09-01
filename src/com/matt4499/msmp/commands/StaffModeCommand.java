@@ -19,19 +19,19 @@ public class StaffModeCommand implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player admin = (Player) commandSender;
-        if(!admin.hasPermission("staff.staffmode")) { admin.sendMessage(Main.hex("#dc143c&lSTAFF &f➠ #dc143cYou do not have permission to use this command.")); return true; }
+        if(!admin.hasPermission("staff.staffmode")) { admin.sendMessage(Main.hex("#dc143c&lSTAFF &7➠ #dc143cYou do not have permission to use this command.")); return true; }
         if(!staffMode.containsKey(admin)) {
             staffMode.put(admin, false);
         }
         if(staffMode.get(admin)) {
             staffMode.put(admin, false);
-            announceStaff("#dc143c&lSTAFF &f➠ #dc143c" + admin.getDisplayName() + " &7has #dc143cdisabled &7staff mode.");
+            announceStaff("#dc143c&lSTAFF &7➠ #dc143c" + admin.getDisplayName() + " &7has #dc143cdisabled &7staff mode.");
             log("[Staff] " + admin.getDisplayName() + " has disabled staff mode.");
             admin.setGameMode(GameMode.SURVIVAL);
             admin.teleport(staffLastLoc.get(admin));
         } else {
             staffMode.put(admin, true);
-            announceStaff("#dc143c&lSTAFF &f➠ #dc143c" + admin.getDisplayName() + " &7has &aenabled &7staff mode.");
+            announceStaff("#dc143c&lSTAFF &7➠ #dc143c" + admin.getDisplayName() + " &7has &aenabled &7staff mode.");
             log("[Staff] " + admin.getDisplayName() + " has enabled staff mode.");
             staffLastLoc.put(admin, admin.getLocation());
             admin.setGameMode(GameMode.SPECTATOR);

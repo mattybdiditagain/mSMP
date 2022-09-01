@@ -8,7 +8,7 @@ public class DeathCoordinates implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         BackCommand.back.put(e.getEntity(), e.getEntity().getLocation());
-        e.getEntity().sendMessage(Main.hex("#dc143c&lSERVER &f➠ &7You died at #dc143c" + e.getEntity().getLocation().getBlockX() + "&7, #dc143c" + e.getEntity().getLocation().getBlockY() + "&7, #dc143c" + e.getEntity().getLocation().getBlockZ() + "&7 in #dc143c" + e.getEntity().getLocation().getWorld().getName()));
+        e.getEntity().sendMessage(Main.hex("#dc143c&lSERVER &7➠ &7You died at #dc143c" + e.getEntity().getLocation().getBlockX() + "&7, #dc143c" + e.getEntity().getLocation().getBlockY() + "&7, #dc143c" + e.getEntity().getLocation().getBlockZ() + "&7 in #dc143c" + e.getEntity().getLocation().getWorld().getName()));
     }
 }
 

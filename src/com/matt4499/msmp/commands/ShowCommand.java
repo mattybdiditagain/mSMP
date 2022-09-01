@@ -17,11 +17,11 @@ public class ShowCommand implements CommandExecutor {
         Player player = (Player) commandSender;
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
         if(itemInMainHand.getType() == Material.AIR) {
-            player.sendMessage(Main.hex("#dc143c&lSERVER &f➠ #dc143cYou must be holding an item to use this command."));
+            player.sendMessage(Main.hex("#dc143c&lSERVER &7➠ #dc143cYou must be holding an item to use this command."));
         } else {
             if (cooldown.containsKey(player)) {
                 if (System.currentTimeMillis() - cooldown.get(player) < 5000) {
-                    player.sendMessage(Main.hex("#dc143c&lSERVER &f➠ #dc143cYou must wait 5 seconds before using this command again."));
+                    player.sendMessage(Main.hex("#dc143c&lSERVER &7➠ #dc143cYou must wait 5 seconds before using this command again."));
                     return true;
                 }
             }
@@ -36,10 +36,10 @@ public class ShowCommand implements CommandExecutor {
                     enchantments.append(e.getKey().getKey()).append(" ").append(itemInMainHand.getEnchantmentLevel(e)).append(", ");
                 }
                 enchantments.delete(enchantments.length() - 2, enchantments.length());
-                Bukkit.broadcastMessage(Main.hex("#dc143c&lSERVER &f➠ &e" + playerName + " &7shows: &e" + itemName + " &7with enchants: &e" + enchantments));
+                Bukkit.broadcastMessage(Main.hex("#dc143c&lSERVER &7➠ &e" + playerName + " &7shows: &e" + itemName + " &7with enchants: &e" + enchantments));
                 Main.logToChatChannel("[Show] " + playerName + " showed " + itemName + " with enchants: "  + enchantments);
             } else {
-                Bukkit.broadcastMessage(Main.hex("#dc143c&lSERVER &f➠ &e" + playerName + " &7shows &e" + amount + "x &e" + itemName));
+                Bukkit.broadcastMessage(Main.hex("#dc143c&lSERVER &7➠ &e" + playerName + " &7shows &e" + amount + "x &e" + itemName));
                 Main.logToChatChannel("[Show] " + playerName + " showed " + amount +"x " + itemName);
             }
         }

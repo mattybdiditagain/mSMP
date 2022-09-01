@@ -22,15 +22,15 @@ public class PunishCommand implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player admin = (Player) commandSender;
         if(!admin.hasPermission("staff.punish")) {
-            admin.sendMessage(Main.hex("#dc143c&lPUNISH &f➠ #dc143cYou do not have permission to use this command."));
+            admin.sendMessage(Main.hex("#dc143c&lPUNISH &7➠ #dc143cYou do not have permission to use this command."));
             return true;
         }
         if(args.length == 0) {
-            admin.sendMessage(Main.hex("#dc143c&lPUNISH &f➠ #dc143cUsage: /punish <player>"));
+            admin.sendMessage(Main.hex("#dc143c&lPUNISH &7➠ #dc143cUsage: /punish <player>"));
             return true;
         }
         String target = args[0];
-        Inventory inv = Bukkit.createInventory(null, 54, Main.hex("#dc143c&lPUNISH" + " &f➠ #dc143c" + target));
+        Inventory inv = Bukkit.createInventory(null, 54, Main.hex("#dc143c&lPUNISH" + " &7➠ #dc143c" + target));
         ItemStack filler = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta fillerMeta = filler.getItemMeta();
         assert fillerMeta != null;
@@ -108,7 +108,7 @@ public class PunishCommand implements CommandExecutor, Listener {
         if(e.getView().getTitle().contains(Main.hex("#dc143c&lPUNISH"))) {
             e.setCancelled(true);
             if(e.getCurrentItem() != null) {
-                String playerName = e.getView().getTitle().replace(Main.hex("#dc143c&lPUNISH" + " &f➠ #dc143c"), "");
+                String playerName = e.getView().getTitle().replace(Main.hex("#dc143c&lPUNISH" + " &7➠ #dc143c"), "");
                 switch (e.getRawSlot()) {
                     case 4 -> Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
                         Player admin = (Player) e.getWhoClicked();

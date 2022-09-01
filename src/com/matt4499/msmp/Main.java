@@ -1,10 +1,16 @@
 package com.matt4499.msmp;
 import com.matt4499.msmp.commands.*;
+import com.matt4499.msmp.economy.EconomyBalanceCommand;
+import com.matt4499.msmp.economy.EconomySetCommand;
 import com.matt4499.msmp.events.*;
 import com.matt4499.msmp.homes.*;
 import com.matt4499.msmp.types.DataHelper;
 import com.matt4499.msmp.types.DiscordWebhook;
+import com.matt4499.msmp.economy.EcoHelper;
+import com.matt4499.msmp.economy.mEconomy;
+import com.matt4499.msmp.types.VoidChunkGenerator;
 import com.matt4499.msmp.warps.*;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,10 +19,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -32,6 +41,9 @@ public class Main extends JavaPlugin implements Listener {
     public static JavaPlugin instance;
     public static HomeHelper homeHelper;
     public static WarpHelper warpHelper;
+    public static EcoHelper ecoHelper;
+    public static mEconomy mEconomy;
+    public static Economy economy;
 
     public FileConfiguration config = this.getConfig();
     public static File configFile;
@@ -39,11 +51,16 @@ public class Main extends JavaPlugin implements Listener {
     public static String logWebhookURL;
     @Override
     public void onEnable() {
-        WorldCreator wc = new WorldCreator("farmworld");
-        wc.createWorld();
-        WorldCreator wc2 = new WorldCreator("farmworld_nether").environment(World.Environment.NETHER).type(WorldType.NORMAL);
-        wc2.createWorld();
         instance = this;
+        ecoHelper = new EcoHelper();
+        mEconomy = new mEconomy();
+
+        getServer().getServicesManager().register(Economy.class, mEconomy, this, ServicePriority.Highest);
+
+        World farmworld = new WorldCreator("farmworld").createWorld();
+        World farmworldNether = new WorldCreator("farmworld_nether").environment(World.Environment.NETHER).type(WorldType.NORMAL).createWorld();
+        World jailWorld = new WorldCreator("jail").environment(World.Environment.NETHER).generator(new VoidChunkGenerator()).createWorld();
+
         homeHelper = new HomeHelper();
         warpHelper = new WarpHelper();
         playersConfigFile = new File(getDataFolder(), "players.yml");
@@ -56,7 +73,6 @@ public class Main extends JavaPlugin implements Listener {
         chatWebhookURL = this.config.getString("chat-channel-webhook-url");
         logWebhookURL = this.config.getString("logs-channel-webhook-url");
 
-        startScoreboardTimer();
         FreezeCommand freezeCommand = new FreezeCommand();
         WarpCommand warpCommand = new WarpCommand();
         FarmWorldCommand fwc = new FarmWorldCommand();
@@ -109,6 +125,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("show").setExecutor(new ShowCommand());
         getCommand("freeze").setExecutor(freezeCommand);
         getCommand("seen").setExecutor(new SeenCommand());
+        getCommand("globalstats").setExecutor(new GlobalStatsCommand());
 
         getCommand("warp").setExecutor(warpCommand);
         getCommand("setwarp").setExecutor(new SetWarpCommand());
@@ -120,6 +137,9 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("delhome").setExecutor(new DelHomeCommand());
         getCommand("homes").setExecutor(new HomesCommand());
+
+        getCommand("balance").setExecutor(new EconomyBalanceCommand());
+        getCommand("setbalance").setExecutor(new EconomySetCommand());
 
         getCommand("farmworld").setExecutor(fwc);
     }
@@ -182,8 +202,16 @@ public class Main extends JavaPlugin implements Listener {
                     setGlobalVar("totaldeaths", 0);
                     object = 0;
                 }
+                case "totalblocksbroke" -> {
+                    setGlobalVar("totalblocksbroke", 0);
+                    object = 0;
+                }
+                case "totalblocksplaced" -> {
+                    setGlobalVar("totalblocksplaced", 0);
+                    object = 0;
+                }
                 default -> {
-                    Bukkit.getConsoleSender().sendMessage("[Data] Default value for global variable " + key + " is null and is a known key with no default value.");
+                    Bukkit.getConsoleSender().sendMessage(Main.hex("&4[Data] Default value for global variable " + key + " is null and is a known key with no default value."));
                 }
             }
         }
@@ -193,7 +221,6 @@ public class Main extends JavaPlugin implements Listener {
         playerdata.set("global."+key, value);
         try {
             playerdata.save(playersConfigFile);
-            Bukkit.getConsoleSender().sendMessage("[Data] Set global."+key+" to: " + value.toString());
         } catch (IOException e) {
             Bukkit.getConsoleSender().sendMessage("[Data] An error occured while trying to save data");
             e.printStackTrace();
@@ -204,23 +231,10 @@ public class Main extends JavaPlugin implements Listener {
         playerdata.set(id+"."+key, value);
         try {
             playerdata.save(playersConfigFile);
-            Bukkit.getConsoleSender().sendMessage("[Data] Set " + id+"."+key+" to: " + value.toString());
         } catch (IOException e) {
             Bukkit.getConsoleSender().sendMessage("[Data] An error occured while trying to save data");
             e.printStackTrace();
         }
-    }
-
-    public void startScoreboardTimer() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-                int onlineCount = Bukkit.getOnlinePlayers().size();
-                if(onlineCount == 0) return;
-                Bukkit.getOnlinePlayers().forEach(player -> {
-                    int ping = player.getPing();
-                    int ramUsage = (int) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-                    player.setPlayerListFooter(hex("#dc143cPing: " + ping + " #dc143cOnline: " + onlineCount));
-                });
-        }, 0L, 200L);
     }
     public static void announce(String string) {
         Bukkit.broadcastMessage(hex(string));

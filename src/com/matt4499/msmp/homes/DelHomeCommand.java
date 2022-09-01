@@ -10,20 +10,20 @@ public class DelHomeCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player p = (Player) commandSender;
         if(args.length == 0) {
-            p.sendMessage(Main.hex("#dc143c&lHOMES &f➠ #dc143cUsage: /delhome <name>"));
+            p.sendMessage(Main.hex("#dc143c&lHOMES &7➠ #dc143cUsage: /delhome <name>"));
             return true;
         }
         if(homeHelper.getPlayerHomeCount(p) == 0) {
-            p.sendMessage(Main.hex("#dc143c&lHOMES &f➠ #dc143cYou have no homes!"));
+            p.sendMessage(Main.hex("#dc143c&lHOMES &7➠ #dc143cYou have no homes!"));
             return true;
         }
         String homeName = args[0];
         if(homeHelper.getPlayerHomeLocation(p, homeName) == null) {
-            p.sendMessage(Main.hex("#dc143c&lHOMES &f➠ &7Home #dc143c" + homeName + " &7not found!"));
+            p.sendMessage(Main.hex("#dc143c&lHOMES &7➠ &7Home #dc143c" + homeName + " &7not found!"));
             return true;
         }
         homeHelper.removePlayerHome(p, homeName);
-        p.sendMessage(Main.hex("#dc143c&lHOMES &f➠ &7Home #dc143c" + homeName + " &7deleted!"));
+        p.sendMessage(Main.hex("#dc143c&lHOMES &7➠ &7Home #dc143c" + homeName + " &7deleted!"));
         return true;
     }
 }

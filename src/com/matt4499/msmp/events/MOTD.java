@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 public class MOTD implements Listener {
-    public ArrayList<String> funnyMessages = new ArrayList<String>();
+    public ArrayList<String> funnyMessages = new ArrayList<>();
     public MOTD() {
         funnyMessages.add("#dc143cLogging in has been disabled.");
         funnyMessages.add("#dc143cAliens have taken over.");
@@ -18,11 +18,10 @@ public class MOTD implements Listener {
         funnyMessages.add("#dc143cMatt4499 says hi!");
         funnyMessages.add("#dc143cAntiGrief + AntiXray = Good Luck ;)");
         funnyMessages.add("#dc143cWe have block logs ;)");
-        funnyMessages.add("#dc143cWe can instantly fix ANY grief :)");
     }
     @EventHandler
     public void ping(ServerListPingEvent e) {
-        e.setMotd(Main.hex("#dc143cmSMP / 1.19 / Fresh World / Discord.IO/mSMP \n" + funnyMessages.get((int) (Math.random() * funnyMessages.size()))));
+        e.setMotd(Main.hex("&cmSMP / 1.19.2 / Fresh Map & Economy / Discord.IO/mSMP \n" + funnyMessages.get((int) (Math.random() * funnyMessages.size()))));
     }
 
 }

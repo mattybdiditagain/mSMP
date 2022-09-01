@@ -14,28 +14,28 @@ public class TPACommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player from = (Player) commandSender;
         if(args.length == 0) {
-            from.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143cUsage: /tpa <player>"));
+            from.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143cUsage: /tpa <player>"));
             return true;
         }
         Player to = Bukkit.getPlayerExact(args[0]);
         if(to == null) {
-            from.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143cThat player is not online!"));
+            from.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143cThat player is not online!"));
         } else {
             if(from == to) {
-                from.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143cYou cannot teleport to yourself!"));
+                from.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143cYou cannot teleport to yourself!"));
                 return true;
             }
-            from.sendMessage(Main.hex("#dc143c&lTPA &f➠ &7You have sent a request to #dc143c" + to.getDisplayName() + "! Expires in 30 seconds."));
-            to.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143c" + from.getDisplayName() + " &7has sent you a request!"));
-            to.sendMessage(Main.hex("#dc143c&lTPA &f➠ &a/tpyes [name] to accept it &7or #dc143cwait 30 seconds to auto-deny it."));
+            from.sendMessage(Main.hex("#dc143c&lTPA &7➠ &7You have sent a request to #dc143c" + to.getDisplayName() + "! Expires in 30 seconds."));
+            to.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143c" + from.getDisplayName() + " &7has sent you a request!"));
+            to.sendMessage(Main.hex("#dc143c&lTPA &7➠ &a/tpyes [name] to accept it &7or #dc143cwait 30 seconds to auto-deny it."));
             TPARequest newtpa = new TPARequest(from, to);
             tpas.add(newtpa);
             Main.logToGameLogs("[TPA] " + from.getDisplayName() + " sent a request to " + to.getDisplayName());
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
                 for(TPARequest tpa : tpas) {
                     if(tpa.from.equals(from) && tpa.to.equals(to)) {
-                        tpa.from.sendMessage(Main.hex("#dc143c&lTPA &f➠ &7Your request to " + tpa.to.getDisplayName() + " has #dc143ctimed out"));
-                        tpa.to.sendMessage(Main.hex("#dc143c&lTPA &f➠ &7" + tpa.from.getDisplayName() + "'s request to you has #dc143ctimed out"));
+                        tpa.from.sendMessage(Main.hex("#dc143c&lTPA &7➠ &7Your request to " + tpa.to.getDisplayName() + " has #dc143ctimed out"));
+                        tpa.to.sendMessage(Main.hex("#dc143c&lTPA &7➠ &7" + tpa.from.getDisplayName() + "'s request to you has #dc143ctimed out"));
                         Main.logToGameLogs("[TPA] " + tpa.from.getDisplayName() + "'s request to " + tpa.to.getDisplayName() + " has timed out");
                         tpas.remove(tpa);
                         break;

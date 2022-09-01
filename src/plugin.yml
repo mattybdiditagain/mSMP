@@ -1,9 +1,10 @@
 main: com.matt4499.msmp.Main
 version: 1.0
-api-version: 1.18
+api-version: 1.19
 description: mSMP
 author: Matt4499
 name: mSMP
+depend: [Vault]
 commands:
   afk:
     description: Toggles your AFK status
@@ -132,3 +133,15 @@ commands:
     description: Teleport to the farmworld
     usage: /farmworld
     aliases: [fw, farmingworld]
+  balance:
+    description: Views your, or another players balance
+    usage: /balance [name] or /bal [name]
+    aliases: [bal]
+  globalstats:
+    description: View server global stats
+    usage: /globalstats or /gstats
+    aliases: [gstats]
+  setbalance:
+    description: Sets the balance of a palyer
+    usage: /setbalance [player] [amount]
+    aliases: [setmoney, seteco, setbal]

@@ -10,14 +10,14 @@ public class WarpsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player p = (Player) commandSender;
         if(warpHelper.getWarpCount() == 0) {
-            p.sendMessage(Main.hex("#dc143c&lWARPS &f➠ #dc143cThere are no warps!"));
+            p.sendMessage(Main.hex("#dc143c&lWARPS &7➠ #dc143cThere are no warps!"));
         } else {
             StringBuilder warpList = new StringBuilder();
             warpHelper.getWarps().keySet().forEach(warpName -> {
                 warpList.append(warpName).append("&7, #dc143c");
             });
             String warps = warpList.substring(0, warpList.length() - 9);
-            p.sendMessage(Main.hex("#dc143c&lWARPS &f➠ &7Warps: #dc143c" + Main.hex(warps)));
+            p.sendMessage(Main.hex("#dc143c&lWARPS &7➠ &7Warps: #dc143c" + Main.hex(warps)));
         }
         return true;
     }

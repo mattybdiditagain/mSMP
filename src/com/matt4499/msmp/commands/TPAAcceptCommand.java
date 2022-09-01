@@ -11,18 +11,18 @@ public class TPAAcceptCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player to = (Player) commandSender;
         if(args.length == 0) {
-            to.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143cUsage: /tpaccept <player>"));
+            to.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143cUsage: /tpaccept <player>"));
             return true;
         }
         Player from = Bukkit.getPlayerExact(args[0]);
         if(from == null) {
-            to.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143cThat player is not online!"));
+            to.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143cThat player is not online!"));
             return true;
         } else {
             for(TPARequest tpa : TPACommand.tpas) {
                 if(tpa.from.equals(from) && tpa.to.equals(to)) {
-                    tpa.to.sendMessage(Main.hex("#dc143c&lTPA &f➠ &aYou have accepted " + tpa.from.getDisplayName() + "'s request!"));
-                    tpa.from.sendMessage(Main.hex("#dc143c&lTPA &f➠ &a" + tpa.to.getDisplayName() + " has accepted your request!"));
+                    tpa.to.sendMessage(Main.hex("#dc143c&lTPA &7➠ &aYou have accepted " + tpa.from.getDisplayName() + "'s request!"));
+                    tpa.from.sendMessage(Main.hex("#dc143c&lTPA &7➠ &a" + tpa.to.getDisplayName() + " has accepted your request!"));
                     BackCommand.back.put(from, from.getLocation());
                     from.teleport(tpa.to.getLocation());
                     TPACommand.tpas.remove(tpa);
@@ -30,7 +30,7 @@ public class TPAAcceptCommand implements CommandExecutor {
                     return true;
                 }
             }
-            to.sendMessage(Main.hex("#dc143c&lTPA &f➠ #dc143cThat player has not sent you a request!"));
+            to.sendMessage(Main.hex("#dc143c&lTPA &7➠ #dc143cThat player has not sent you a request!"));
         }
         return true;
     }

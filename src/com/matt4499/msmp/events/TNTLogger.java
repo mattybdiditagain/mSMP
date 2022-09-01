@@ -12,7 +12,7 @@ public class TNTLogger implements Listener {
             double y = Math.round(e.getBlock().getLocation().getBlockY());
             double z = Math.round(e.getBlock().getLocation().getBlockZ());
             String world = e.getBlock().getWorld().getName();
-            Main.logToGameLogs("[TNT] " + e.getPlayer().getDisplayName() + " placed TNT at " + x + " " + y + " " + z + " in " + world + ".");
+            Main.logToGameLogs("[TNT] " + e.getPlayer().getDisplayName() + " placed TNT at " + x + " " + y + " " + z + " in " + world);
         }
     }
 }

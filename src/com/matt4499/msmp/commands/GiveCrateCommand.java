@@ -11,7 +11,7 @@ public class GiveCrateCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player player = (Player) commandSender;
         if (!player.hasPermission("staff.givecrates")) {
-            player.sendMessage(Main.hex("#dc143c&lCRATES &f➠ #dc143cYou do not have permission to use this command."));
+            player.sendMessage(Main.hex("#dc143c&lCRATES &7➠ #dc143cYou do not have permission to use this command."));
             return true;
         }
         if (strings.length == 0) {
@@ -20,12 +20,12 @@ public class GiveCrateCommand implements CommandExecutor {
         }
         Player target = Bukkit.getPlayer(strings[0]);
         if (target == null) {
-            player.sendMessage(Main.hex("#dc143c&lCRATES &f➠ #dc143cPlayer not found"));
+            player.sendMessage(Main.hex("#dc143c&lCRATES &7➠ #dc143cPlayer not found"));
             return true;
         }
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "givevotepoint " + target.getName());
         CrateHandler.givePlayerVoteCrate(target);
-        player.sendMessage(Main.hex("#dc143c&lCRATES &f➠ &7Crate given to #dc143c" + target.getName()));
+        player.sendMessage(Main.hex("#dc143c&lCRATES &7➠ &7Crate given to #dc143c" + target.getName()));
         return true;
     }
 }

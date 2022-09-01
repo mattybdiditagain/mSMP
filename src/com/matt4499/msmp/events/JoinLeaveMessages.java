@@ -59,6 +59,9 @@ public class JoinLeaveMessages implements Listener {
 
     public String getFormattedMsg(Player p, String type) {
         String finalmsg = "";
+        if(p.hasPermission("staff.silentjoinleave")) {
+            return null;
+        }
         switch (type) {
             case "join" -> {
                 int index = (int) (Math.random() * joinMsgs.size());

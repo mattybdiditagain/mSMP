@@ -9,20 +9,20 @@ public class DelWarpCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player admin = (Player) commandSender;
         if(!admin.hasPermission("staff.delwarp")) {
-            admin.sendMessage(Main.hex("#dc143c&lWARPS &f➠ #dc143cYou do not have permission to use this command!"));
+            admin.sendMessage(Main.hex("#dc143c&lWARPS &7➠ #dc143cYou do not have permission to use this command!"));
             return true;
         }
         if (strings.length == 0) {
-            admin.sendMessage(Main.hex("#dc143c&lWARPS &f➠ #dc143cUsage: /delwarp <name>"));
+            admin.sendMessage(Main.hex("#dc143c&lWARPS &7➠ #dc143cUsage: /delwarp <name>"));
             return true;
         }
         String warpName = strings[0].toLowerCase();
         if(!Main.warpHelper.doesWarpExist(warpName)) {
-            admin.sendMessage(Main.hex("#dc143c&lWARPS &f➠ #dc143cWarp " + warpName + " does not exist!"));
+            admin.sendMessage(Main.hex("#dc143c&lWARPS &7➠ #dc143cWarp " + warpName + " does not exist!"));
             return true;
         }
         Main.warpHelper.removeWarp(warpName);
-        admin.sendMessage(Main.hex("#dc143c&lWARPS &f➠ &7Warp " + warpName + " deleted!"));
+        admin.sendMessage(Main.hex("#dc143c&lWARPS &7➠ &7Warp " + warpName + " deleted!"));
         return true;
     }
 }

@@ -36,7 +36,7 @@ public class ChatFilter implements Listener {
         filtered.put("faggot", "warn %p [ChatFilter] Inappropriate Message");
         filtered.put("f@g", "ban %p [ChatFilter] Inappropriate #4");
 
-        phrases.put("join my server", "mute -s %p [ChatFilter] Advertising");
+        phrases.put("join my server", "tempban -s %p 1w [ChatFilter] Advertising");
 
     }
     @EventHandler(ignoreCancelled = true)

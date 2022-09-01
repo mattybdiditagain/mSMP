@@ -16,7 +16,7 @@ public class SpawnCommand implements CommandExecutor {
         BackCommand.back.put(player, player.getLocation());
         Location spawn = new Location(Bukkit.getWorld("world"), -34.0, 66.0, 5.0);
         player.teleport(spawn);
-        player.sendMessage(Main.hex("#dc143c&lSERVER &f➠ &7Teleported to spawn."));
+        player.sendMessage(Main.hex("#dc143c&lSERVER &7➠ &7Teleported to spawn."));
         Main.logToGameLogs("[TP] " + player.getDisplayName() + " teleported to spawn.");
         return true;
     }

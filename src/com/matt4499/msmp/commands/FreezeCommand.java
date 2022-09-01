@@ -16,26 +16,26 @@ public class FreezeCommand implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player admin = (Player) commandSender;
         if(!admin.hasPermission("staff.freeze")) {
-            admin.sendMessage(Main.hex("#dc143c&lFREEZE &f➠ &cYou do not have permission to use this command!"));
+            admin.sendMessage(Main.hex("#dc143c&lFREEZE &7➠ &cYou do not have permission to use this command!"));
             return true;
         }
         if(args.length == 0) {
-            admin.sendMessage(Main.hex("#dc143c&lREPORTS &f➠ #dc143cUsage: /freeze <player>"));
+            admin.sendMessage(Main.hex("#dc143c&lREPORTS &7➠ #dc143cUsage: /freeze <player>"));
             return true;
         }
         Player target = Bukkit.getPlayerExact(args[0]);
         if(target == null) {
-            admin.sendMessage(Main.hex("#dc143c&lREPORTS &f➠ #dc143cPlayer not found."));
+            admin.sendMessage(Main.hex("#dc143c&lREPORTS &7➠ #dc143cPlayer not found."));
             return true;
         }
         if(isPlayerFrozen(target)) {
             frozen.remove(target);
-            target.sendMessage(Main.hex("#dc143c&lFREEZE &f➠ &7You have been unfrozen by #dc143c" + admin.getDisplayName()));
+            target.sendMessage(Main.hex("#dc143c&lFREEZE &7➠ &7You have been unfrozen by #dc143c" + admin.getDisplayName()));
             announceStaff("#dc143c"+target.getDisplayName() + " &7has been unfrozen by #dc143c" + admin.getDisplayName());
             Main.logToGameLogs("[Freeze] " + admin.getDisplayName() + " unfroze " + target.getDisplayName());
         } else {
             frozen.put(target, true);
-            target.sendMessage(Main.hex("#dc143c&lFREEZE &f➠ &cYou have been frozen by " + admin.getDisplayName()));
+            target.sendMessage(Main.hex("#dc143c&lFREEZE &7➠ &cYou have been frozen by " + admin.getDisplayName()));
             announceStaff("#dc143c"+target.getDisplayName() + " &7has been frozen by #dc143c" + admin.getDisplayName());
             Main.logToGameLogs("[Freeze] " + admin.getDisplayName() + " froze " + target.getDisplayName());
         }
@@ -58,7 +58,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
     public void announceStaff(String message) {
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.hasPermission("staff.freeze")) {
-                p.sendMessage(Main.hex("#dc143c&lFREEZE &f➠ &7" + message));
+                p.sendMessage(Main.hex("#dc143c&lFREEZE &7➠ &7" + message));
             }
         }
     }

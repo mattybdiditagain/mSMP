@@ -45,7 +45,7 @@ public class AntiMobGrief implements Listener {
                 if(tameable.isTamed()) {
                     if(tameable.getOwner() != player) {
                         e.setCancelled(true);
-                        player.sendMessage(Main.hex("#dc143c&lSERVER &f➠ #dc143cYou cannot damage " + tameable.getName() + " because they're owned by " + Objects.requireNonNull(tameable.getOwner()).getName()));
+                        player.sendMessage(Main.hex("#dc143c&lSERVER &7➠ #dc143cYou cannot damage " + tameable.getName() + " because it's owned by " + Objects.requireNonNull(tameable.getOwner()).getName()));
                     }
                 }
             }

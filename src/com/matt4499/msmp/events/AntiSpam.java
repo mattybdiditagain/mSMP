@@ -18,7 +18,7 @@ public class AntiSpam implements Listener {
         if (lastMessage.containsKey(player)) {
             if (lastMessage.get(player).equalsIgnoreCase(e.getMessage())) {
                 e.setCancelled(true);
-                player.sendMessage(Main.hex("#dc143c&lSERVER &f➠ #dc143cYou cannot send the same message again."));
+                player.sendMessage(Main.hex("#dc143c&lSERVER &7➠ #dc143cYou cannot send the same message again."));
                 return;
             }
         }

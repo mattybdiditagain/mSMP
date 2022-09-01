@@ -24,18 +24,18 @@ public class WarpCommand implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player p = (Player) commandSender;
         if(args.length == 0) {
-            p.sendMessage(Main.hex("#dc143c&lWARPS &f➠ #dc143cUsage: /warp <name>"));
+            p.sendMessage(Main.hex("#dc143c&lWARPS &7➠ #dc143cUsage: /warp <name>"));
             return true;
         }
         String warpName = args[0].toLowerCase();
         if(!warpHelper.doesWarpExist(warpName)) {
-            p.sendMessage(Main.hex("#dc143c&lWARPS &f➠ &7Warp #dc143c" + warpName + " &7not found!"));
+            p.sendMessage(Main.hex("#dc143c&lWARPS &7➠ &7Warp #dc143c" + warpName + " &7not found!"));
             return true;
         }
         Location loc = warpHelper.getWarpLocation(warpName);
         BackCommand.back.put(p, p.getLocation());
         p.teleport(loc);
-        p.sendMessage(Main.hex("#dc143c&lWARPS &f➠ &7You teleported to warp: #dc143c" + warpName));
+        p.sendMessage(Main.hex("#dc143c&lWARPS &7➠ &7You teleported to warp: #dc143c" + warpName));
         Main.logToGameLogs("[TP] "+ p.getDisplayName() + " teleported to warp: " + warpName);
         return true;
     }
@@ -53,7 +53,7 @@ public class WarpCommand implements CommandExecutor, Listener {
                 Player p = (Player) e.getWhoClicked();
                 Location warpLoc = warpHelper.getWarpLocation(warpName);
                 p.teleport(warpLoc);
-                p.sendMessage(Main.hex("#dc143c&lWARPS &f➠ &7You teleported to warp: #dc143c" + warpName));
+                p.sendMessage(Main.hex("#dc143c&lWARPS &7➠ &7You teleported to warp: #dc143c" + warpName));
                 Main.logToGameLogs("[TP] " + p.getDisplayName() + " teleported to warp: " + warpName);
             }
         }

@@ -18,7 +18,7 @@ public class ConsoleVoteCrate implements CommandExecutor {
             commandSender.sendMessage("Player not found");
             return true;
         }
-        Bukkit.broadcastMessage(Main.hex("#dc143c&lVOTES &f➠ #dc143c" + target.getDisplayName() + " &7got a vote crate from #dc143c/vote"));
+        Bukkit.broadcastMessage(Main.hex("#dc143c&lVOTES &7➠ #dc143c" + target.getDisplayName() + " &7got a vote crate from #dc143c/vote"));
         Main.logToChatChannel("**VOTES:** " + target.getDisplayName() + " used /vote and got a vote crate!");
         Main.logToGameLogs("[VOTE] " + target.getDisplayName() + " used /vote and got a vote crate!");
         CrateHandler.givePlayerVoteCrate(target);
